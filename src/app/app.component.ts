@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,12 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'angularclient';
+  quizStarted = false;
+
+  constructor(private router: Router) {}
+
+  startQuiz(): void {
+    this.quizStarted = true;
+    this.router.navigate(['/quiz']); // Redirect to the quiz component
+  }
 }

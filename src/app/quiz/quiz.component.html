@@ -1,0 +1,19 @@
+<div class="quiz-container">
+  <h2>Quiz</h2>
+
+  <!-- Display the current question -->
+  <div *ngIf="questions.length > 0">
+    <p>{{ questions[currentQuestionIndex].question }}</p>
+    <ul>
+      <li *ngFor="let option of questions[currentQuestionIndex].options">
+        <button (click)="selectAnswer(option)">{{ option }}</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Navigation buttons -->
+  <div class="navigation">
+    <button (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0">Previous</button>
+    <button (click)="nextQuestion()" [disabled]="currentQuestionIndex === questions.length - 1">Next</button>
+  </div>
+</div>
