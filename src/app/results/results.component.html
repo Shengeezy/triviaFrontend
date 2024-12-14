@@ -1,0 +1,29 @@
+<div class="results-container">
+  <h2>Quiz Results</h2>
+
+  <!-- Display the user's score -->
+  <p>Your Score: {{ score }} / {{ totalQuestions }}</p>
+
+  <!-- Feedback for each question -->
+  <div *ngFor="let result of results">
+    <div class="result">
+      <p>
+        <strong>Question:</strong> {{ result.question }}
+      </p>
+      <p>
+        <strong>Your Answer:</strong> {{ result.userAnswer }}
+        <span [class.correct]="result.correct" [class.incorrect]="!result.correct">
+          ({{ result.correct ? 'Correct' : 'Incorrect' }})
+        </span>
+      </p>
+      <div *ngIf="!result.correct">
+        <p>
+          <strong>Correct Answer:</strong> {{ result.correctAnswer }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Retry button -->
+  <button (click)="retryQuiz()">Retry Quiz</button>
+</div>

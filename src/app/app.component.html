@@ -4,11 +4,18 @@
   </header>
 
   <main class="app-main">
-    <!-- Angular Router Outlet for Navigation -->
-    <router-outlet></router-outlet>
+    <!-- Display start quiz button initially -->
+    <div *ngIf="!quizStarted">
+      <button (click)="startQuiz()">Start Quiz</button>
+    </div>
 
-    <!-- Start Quiz Button -->
-    <button routerLink="/quiz" class="start-button">Start Quiz</button>
+    <!-- Results Button -->
+    <div *ngIf="quizStarted">
+      <button (click)="showResults()">View Results</button>
+    </div>
+
+    <!-- Angular Router Outlet for Navigation -->
+    <router-outlet *ngIf="quizStarted"></router-outlet>
   </main>
 
   <footer class="app-footer">
