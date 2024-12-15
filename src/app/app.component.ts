@@ -10,13 +10,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  title: string = 'angularclient';
   quizStarted = false;
 
   constructor(private router: Router) {}
 
   startQuiz(): void {
     this.quizStarted = true;
-    this.router.navigate(['/quiz']); // Redirect to the quiz component
+    this.router.navigate(['/quiz']);
   }
 
   showResults(): void {

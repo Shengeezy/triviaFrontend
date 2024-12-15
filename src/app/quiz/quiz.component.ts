@@ -1,32 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Question } from '../interfaces/question.interface';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
   // styleUrls: ['./quiz.component.css']
-  imports: [CommonModule]
+  imports: [CommonModule],
+  providers: [ApiService]
 })
 export class QuizComponent implements OnInit {
   currentQuestionIndex: number = 0;
   questions: any[] = []; // Placeholder for quiz questions
   selectedAnswers: string[] = []; // To store selected answers
 
+  constructor(private apiService: ApiService) {} // Injected ApiService
+
   ngOnInit(): void {
-    // Load or generate questions here
-    this.questions = [
-      {
-        question: 'What is the capital of France?',
-        options: ['Paris', 'London', 'Berlin', 'Madrid'],
-        answer: 'Paris'
-      },
-      {
-        question: 'Which planet is known as the Red Planet?',
-        options: ['Venus', 'Mars', 'Jupiter', 'Saturn'],
-        answer: 'Mars'
+    // Fetch questions from the backend
+    this.apiService.getQuestions().subscribe(
+      (data: Question[]) => {
+        this.questions = data; // Assign fetched questions
       }
-    ];
+    );
   }
+
+  // ngOnInit(): void {
+  //   // Load or generate questions here
+  //   this.questions = [
+  //     {
+  //       question: 'What is the capital of France?',
+  //       options: ['Paris', 'London', 'Berlin', 'Madrid'],
+  //       answer: 'Paris'
+  //     },
+  //     {
+  //       question: 'Which planet is known as the Red Planet?',
+  //       options: ['Venus', 'Mars', 'Jupiter', 'Saturn'],
+  //       answer: 'Mars'
+  //     }
+  //   ];
+  // }
 
   // Method to handle answer selection
   selectAnswer(option: string): void {
