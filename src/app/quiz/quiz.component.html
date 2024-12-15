@@ -1,19 +1,59 @@
+<!--<div class="quiz-container">-->
+<!--  <h2>Quiz</h2>-->
+
+<!--  &lt;!&ndash; Display the current question &ndash;&gt;-->
+<!--  <div *ngIf="questions.length > 0">-->
+<!--    <p>{{ questions[currentQuestionIndex].question }}</p>-->
+<!--    <ul>-->
+<!--      <li *ngFor="let option of questions[currentQuestionIndex].options">-->
+<!--        <button (click)="selectAnswer(option, questions[currentQuestionIndex].question)">{{ option }}</button>-->
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+
+<!--  &lt;!&ndash; Navigation buttons &ndash;&gt;-->
+<!--  <div class="navigation">-->
+<!--    <button (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0">Previous</button>-->
+<!--    <button (click)="nextQuestion()" [disabled]="currentQuestionIndex === questions.length - 1">Next</button>-->
+<!--  </div>-->
+<!--</div>-->
+
+<script src="../results/results.component.ts"></script>
 <div class="quiz-container">
   <h2>Quiz</h2>
 
   <!-- Display the current question -->
   <div *ngIf="questions.length > 0">
-    <p>{{ questions[currentQuestionIndex].question }}</p>
-    <ul>
-      <li *ngFor="let option of questions[currentQuestionIndex].options">
-        <button (click)="selectAnswer(option)">{{ option }}</button>
-      </li>
-    </ul>
+    <p>
+      <strong>Question {{ currentQuestionIndex + 1 }}:</strong>
+      {{ questions[currentQuestionIndex]?.question }}
+    </p>
+
+    <!-- Display the options -->
+    <div class="options">
+      <p *ngFor="let option of questions[currentQuestionIndex]?.options">
+        <span
+          [ngClass]="{'selected': selectedAnswers[currentQuestionIndex]?.answer === option}"
+          (click)="selectAnswer(option, questions[currentQuestionIndex]?.question)">
+          {{ option }}
+        </span>
+      </p>
+    </div>
   </div>
 
   <!-- Navigation buttons -->
   <div class="navigation">
-    <button (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0">Previous</button>
-    <button (click)="nextQuestion()" [disabled]="currentQuestionIndex === questions.length - 1">Next</button>
+    <button (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0">
+      Previous
+    </button>
+    <button (click)="nextQuestion()" [disabled]="currentQuestionIndex === questions.length - 1">
+      Next
+    </button>
+  </div>
+
+  <!-- Submit button -->
+  <div *ngIf="currentQuestionIndex === questions.length - 1">
+    <button (click)="submitQuiz()">Submit</button>
   </div>
 </div>
+

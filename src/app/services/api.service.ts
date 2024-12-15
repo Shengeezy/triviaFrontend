@@ -25,7 +25,7 @@ export class ApiService {
    * @param userAnswers - Array of user-selected answers
    * @returns Observable<Result> - Evaluation result
    */
-  checkAnswers(userAnswers: string[]): Observable<Result> {
+  checkAnswers(userAnswers: { question: string, answer: string }[]): Observable<Result> {
     return this.http.post<Result>(`${this.apiUrl}/checkanswers`, userAnswers);
   }
 }

@@ -2,20 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Question } from '../interfaces/question.interface';
 import { ApiService } from '../services/api.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
-  // styleUrls: ['./quiz.component.css']
-  imports: [CommonModule],
-  providers: [ApiService]
+  styleUrls: ['./quiz.component.css'],
+  imports: [CommonModule]
+  // providers: [ApiService]
 })
 export class QuizComponent implements OnInit {
   currentQuestionIndex: number = 0;
   questions: any[] = []; // Placeholder for quiz questions
-  selectedAnswers: string[] = []; // To store selected answers
+  selectedAnswers: { question: string, answer: string}[]=[]; // Dictionary to store question-answer pairs
 
-  constructor(private apiService: ApiService) {} // Injected ApiService
+  constructor(private apiService: ApiService, private router: Router) {} // Injected ApiService
 
   ngOnInit(): void {
     // Fetch questions from the backend
@@ -26,25 +27,16 @@ export class QuizComponent implements OnInit {
     );
   }
 
-  // ngOnInit(): void {
-  //   // Load or generate questions here
-  //   this.questions = [
-  //     {
-  //       question: 'What is the capital of France?',
-  //       options: ['Paris', 'London', 'Berlin', 'Madrid'],
-  //       answer: 'Paris'
-  //     },
-  //     {
-  //       question: 'Which planet is known as the Red Planet?',
-  //       options: ['Venus', 'Mars', 'Jupiter', 'Saturn'],
-  //       answer: 'Mars'
-  //     }
-  //   ];
-  // }
 
   // Method to handle answer selection
-  selectAnswer(option: string): void {
-    this.selectedAnswers[this.currentQuestionIndex] = option;
+  selectAnswer(answer: string, question: string): void {
+    if (!this.selectedAnswers[this.currentQuestionIndex]) {
+      this.selectedAnswers.push({answer: answer, question: question});
+    }
+    else {
+      this.selectedAnswers[this.currentQuestionIndex].answer = answer;
+      this.selectedAnswers[this.currentQuestionIndex].question = question;
+    }
   }
 
   // Method to go to the next question
@@ -59,5 +51,28 @@ export class QuizComponent implements OnInit {
     if (this.currentQuestionIndex > 0) {
       this.currentQuestionIndex--;
     }
+  }
+
+  // Method to submit the quiz
+  submitQuiz(): void {
+    console.log("Submitted Answers:", this.selectedAnswers);
+    // You can send selectedAnswers to the backend here
+    this.apiService.checkAnswers(this.selectedAnswers).subscribe(
+      (result) => {
+        console.log("Quiz results:", result);
+        // this.router.navigate(['/results'], { state: { results: result } });
+        // Navigate to results page after getting the result from backend
+        this.router.navigate(['/results'], { state: { results: result } })
+          .then(() => {
+            console.log('Navigation to /results completed');
+          })
+          .catch(error => {
+            console.error('Error navigating to /results:', error);
+          });
+      },
+      error => {
+        console.error('Error checking answers:', error);
+      }
+    );
   }
 }

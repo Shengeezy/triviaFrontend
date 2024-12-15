@@ -1,0 +1,121 @@
+/* General container styles */
+.results-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* Title styles */
+.results-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Score display styles */
+.results-container p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+/* Individual result styles */
+.result {
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Highlight selected answers */
+.result p strong {
+  font-weight: bold;
+}
+
+/* Correct/incorrect answer styles */
+span.correct {
+  color: green;
+  font-weight: bold;
+}
+
+span.incorrect {
+  color: red;
+  font-weight: bold;
+}
+
+/* Correct answer section */
+.result div {
+  margin-top: 10px;
+  padding: 10px;
+  border-left: 4px solid red;
+  background-color: #ffe6e6;
+}
+
+.result div p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Button styles */
+button {
+  display: block;
+  width: 100%;
+  margin: 20px 0 0;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Hover and focus effects for buttons */
+button:focus,
+button:active {
+  outline: none;
+  box-shadow: 0 0 4px #007bff;
+}
+
+/* Options container */
+.options p {
+  margin: 10px 0;
+}
+
+/* Option styles */
+.options span {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Highlight selected answer */
+span.selected {
+  background-color: #007bff;
+  color: white;
+  border-color: #0056b3;
+}
+
+span:hover {
+  background-color: #0056b3;
+  color: white;
+}
+

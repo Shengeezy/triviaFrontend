@@ -1,3 +1,4 @@
+<script src="services/api.service.ts"></script>
 <div class="app-container">
   <header class="app-header">
     <h1>Trivia Quiz</h1>
@@ -7,11 +8,6 @@
     <!-- Display start quiz button initially -->
     <div *ngIf="!quizStarted">
       <button (click)="startQuiz()">Start Quiz</button>
-    </div>
-
-    <!-- Results Button -->
-    <div *ngIf="quizStarted">
-      <button (click)="showResults()">View Results</button>
     </div>
 
     <!-- Angular Router Outlet for Navigation -->
