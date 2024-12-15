@@ -9,7 +9,7 @@ import { Result } from '../interfaces/result.interface';
 })
 export class ApiService {
   private apiUrl = 'http://localhost:8080'; // Base URL of your backend server
-
+  private result!: Observable<Result>;
   constructor(private http: HttpClient) {}
 
   /**
@@ -25,7 +25,11 @@ export class ApiService {
    * @param userAnswers - Array of user-selected answers
    * @returns Observable<Result> - Evaluation result
    */
-  checkAnswers(userAnswers: { question: string, answer: string }[]): Observable<Result> {
-    return this.http.post<Result>(`${this.apiUrl}/checkanswers`, userAnswers);
+  checkAnswers(userAnswers: { question: string, answer: string }[]) {
+    // this.http.post<Result>(`${this.apiUrl}/checkanswers`, userAnswers);
+    this.result = this.http.post<Result>(`${this.apiUrl}/checkanswers`, userAnswers);
+  }
+  getResult() {
+    return this.result;
   }
 }

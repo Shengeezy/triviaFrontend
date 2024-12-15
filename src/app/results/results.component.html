@@ -27,14 +27,15 @@
 <!--  &lt;!&ndash; Retry button &ndash;&gt;-->
 <!--  <button (click)="retryQuiz()">Retry Quiz</button>-->
 <!--</div>-->
+<script src="../interfaces/result.interface.ts"></script>
 <div class="results-container">
   <h2>Quiz Results</h2>
 
   <!-- Display the user's score -->
-  <p>Your Score: {{ score }} / {{ totalQuestions }}</p>
+  <p>Your Score: {{ results.score }} / {{ results.totalQuestions }}</p>
 
   <!-- Feedback for each question -->
-  <div *ngFor="let result of results">
+  <div *ngFor="let result of results.answerInfo">
     <div class="result">
       <p>
         <strong>Question:</strong> {{ result.question }}

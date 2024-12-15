@@ -57,22 +57,7 @@ export class QuizComponent implements OnInit {
   submitQuiz(): void {
     console.log("Submitted Answers:", this.selectedAnswers);
     // You can send selectedAnswers to the backend here
-    this.apiService.checkAnswers(this.selectedAnswers).subscribe(
-      (result) => {
-        console.log("Quiz results:", result);
-        // this.router.navigate(['/results'], { state: { results: result } });
-        // Navigate to results page after getting the result from backend
-        this.router.navigate(['/results'], { state: { results: result } })
-          .then(() => {
-            console.log('Navigation to /results completed');
-          })
-          .catch(error => {
-            console.error('Error navigating to /results:', error);
-          });
-      },
-      error => {
-        console.error('Error checking answers:', error);
-      }
-    );
+    this.apiService.checkAnswers(this.selectedAnswers)
+    this.router.navigate(['/results']);
   }
 }

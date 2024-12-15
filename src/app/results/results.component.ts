@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import {ApiService} from '../services/api.service';
+import {Result} from '../interfaces/result.interface';
 
 @Component({
   selector: 'app-results',
@@ -9,46 +11,16 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule]
 })
 export class ResultsComponent implements OnInit {
-  score: number = 0;
-  totalQuestions: number = 0;
-  results: { question: string, userAnswer: string, correctAnswer: string }[] = []; // Placeholder for result data
+  results: Result = { score: 0, totalQuestions: 0, answerInfo: [] };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit(): void {
-    // Retrieve the results from the navigation state
-    console.log(this.router.getCurrentNavigation()?.extras.state);
-    const navigation = this.router.getCurrentNavigation();
-    this.results = navigation?.extras.state?.['results'].feedback || [];
-
-    // Calculate score and total questions
-    this.score = navigation?.extras.state?.['results'].correctAnswers || 0;
-    this.totalQuestions = navigation?.extras.state?.['results'].totalQuestions || 0;
-    console.log(this.results);
-    console.log(this.score);
-    console.log(this.totalQuestions);
+    this.apiService.getResult().subscribe((results)=> {
+      this.results = results;
+      console.log(this.results);
+    })
   }
-
-
-    // this.results = navigation?.extras.state?.['results'];
-    // // Mock data for testing
-    // this.results = [
-    //   {
-    //     question: 'What is the capital of France?',
-    //     userAnswer: 'Paris',
-    //     correctAnswer: 'Paris',
-    //     correct: true
-    //   },
-    //   {
-    //     question: 'Which planet is known as the Red Planet?',
-    //     userAnswer: 'Venus',
-    //     correctAnswer: 'Mars',
-    //     correct: false
-    //   }
-    // ];
-    // this.score = this.results.filter(r => r.correct).length;
-    // this.totalQuestions = this.results.length;
-  // }
 
   retryQuiz(): void {
     this.router.navigate(['/quiz']); // Navigate back to the quiz component
