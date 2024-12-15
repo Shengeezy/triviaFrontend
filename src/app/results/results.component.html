@@ -1,33 +1,3 @@
-<!--<div class="results-container">-->
-<!--  <h2>Quiz Results</h2>-->
-
-<!--  &lt;!&ndash; Display the user's score &ndash;&gt;-->
-<!--  <p>Your Score: {{ score }} / {{ totalQuestions }}</p>-->
-
-<!--  &lt;!&ndash; Feedback for each question &ndash;&gt;-->
-<!--  <div *ngFor="let result of results">-->
-<!--    <div class="result">-->
-<!--      <p>-->
-<!--        <strong>Question:</strong> {{ result.question }}-->
-<!--      </p>-->
-<!--      <p>-->
-<!--        <strong>Your Answer:</strong> {{ result.userAnswer }}-->
-<!--        <span [class.correct]="result.correct" [class.incorrect]="!result.correct">-->
-<!--          ({{ result.correct ? 'Correct' : 'Incorrect' }})-->
-<!--        </span>-->
-<!--      </p>-->
-<!--      <div *ngIf="!result.correct">-->
-<!--        <p>-->
-<!--          <strong>Correct Answer:</strong> {{ result.correctAnswer }}-->
-<!--        </p>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  &lt;!&ndash; Retry button &ndash;&gt;-->
-<!--  <button (click)="retryQuiz()">Retry Quiz</button>-->
-<!--</div>-->
-<script src="../interfaces/result.interface.ts"></script>
 <div class="results-container">
   <h2>Quiz Results</h2>
 
@@ -35,26 +5,26 @@
   <p>Your Score: {{ results.score }} / {{ results.totalQuestions }}</p>
 
   <!-- Feedback for each question -->
-  <div *ngFor="let result of results.answerInfo">
-    <div class="result">
+  <div *ngFor="let result of results.answerInfo" class="result">
+    <p>
+      <strong>Question:</strong> <span [innerHTML]="result.question"></span>
+    </p>
+    <p>
+      <strong>Your Answer:</strong>
+      <span [innerHTML]="result.userAnswer"></span>
+      <span [class.correct]="result.userAnswer === result.correctAnswer" [class.incorrect]="result.userAnswer !== result.correctAnswer">
+        ({{ result.userAnswer === result.correctAnswer ? 'Correct' : 'Incorrect' }})
+      </span>
+    </p>
+    <div *ngIf="result.userAnswer !== result.correctAnswer">
       <p>
-        <strong>Question:</strong> {{ result.question }}
+        <strong>Correct Answer:</strong> <span [innerHTML]="result.correctAnswer"></span>
       </p>
-      <p>
-        <strong>Your Answer:</strong> {{ result.userAnswer }}
-        <span [class.correct]="result.userAnswer === result.correctAnswer" [class.incorrect]="result.userAnswer !== result.correctAnswer">
-          ({{ result.userAnswer === result.correctAnswer ? 'Correct' : 'Incorrect' }})
-        </span>
-      </p>
-      <div *ngIf="result.userAnswer !== result.correctAnswer">
-        <p>
-          <strong>Correct Answer:</strong> {{ result.correctAnswer }}
-        </p>
-      </div>
     </div>
   </div>
 
   <!-- Retry button -->
   <button (click)="retryQuiz()">Retry Quiz</button>
 </div>
+
 

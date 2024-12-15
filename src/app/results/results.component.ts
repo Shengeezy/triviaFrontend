@@ -7,7 +7,7 @@ import {Result} from '../interfaces/result.interface';
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
-  // styleUrls: ['./results.component.css']
+  styleUrls: ['./results.component.css'],
   imports: [CommonModule]
 })
 export class ResultsComponent implements OnInit {

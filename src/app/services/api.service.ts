@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Question } from '../interfaces/question.interface';
 import { Result } from '../interfaces/result.interface';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root', // Ensures this service is provided at the root level
 })
 export class ApiService {
-  private apiUrl = 'http://localhost:8080'; // Base URL of your backend server
+  private apiUrl = environment.backEndApiUrl; // Base URL of your backend server
   private result!: Observable<Result>;
   constructor(private http: HttpClient) {}
 

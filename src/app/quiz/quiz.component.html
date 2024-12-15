@@ -1,24 +1,3 @@
-<!--<div class="quiz-container">-->
-<!--  <h2>Quiz</h2>-->
-
-<!--  &lt;!&ndash; Display the current question &ndash;&gt;-->
-<!--  <div *ngIf="questions.length > 0">-->
-<!--    <p>{{ questions[currentQuestionIndex].question }}</p>-->
-<!--    <ul>-->
-<!--      <li *ngFor="let option of questions[currentQuestionIndex].options">-->
-<!--        <button (click)="selectAnswer(option, questions[currentQuestionIndex].question)">{{ option }}</button>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--  </div>-->
-
-<!--  &lt;!&ndash; Navigation buttons &ndash;&gt;-->
-<!--  <div class="navigation">-->
-<!--    <button (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0">Previous</button>-->
-<!--    <button (click)="nextQuestion()" [disabled]="currentQuestionIndex === questions.length - 1">Next</button>-->
-<!--  </div>-->
-<!--</div>-->
-
-<script src="../results/results.component.ts"></script>
 <div class="quiz-container">
   <h2>Quiz</h2>
 
@@ -26,7 +5,7 @@
   <div *ngIf="questions.length > 0">
     <p>
       <strong>Question {{ currentQuestionIndex + 1 }}:</strong>
-      {{ questions[currentQuestionIndex]?.question }}
+      <span [innerHTML]="questions[currentQuestionIndex]?.question"></span>
     </p>
 
     <!-- Display the options -->
@@ -34,8 +13,8 @@
       <p *ngFor="let option of questions[currentQuestionIndex]?.options">
         <span
           [ngClass]="{'selected': selectedAnswers[currentQuestionIndex]?.answer === option}"
-          (click)="selectAnswer(option, questions[currentQuestionIndex]?.question)">
-          {{ option }}
+          (click)="selectAnswer(option, questions[currentQuestionIndex]?.question)"
+          [innerHTML]="option">
         </span>
       </p>
     </div>

@@ -9,14 +9,14 @@ import {Router} from '@angular/router';
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.css'],
   imports: [CommonModule]
-  // providers: [ApiService]
 })
 export class QuizComponent implements OnInit {
   currentQuestionIndex: number = 0;
   questions: any[] = []; // Placeholder for quiz questions
   selectedAnswers: { question: string, answer: string}[]=[]; // Dictionary to store question-answer pairs
 
-  constructor(private apiService: ApiService, private router: Router) {} // Injected ApiService
+  constructor(private apiService: ApiService,
+              private router: Router) {} // Injected ApiService
 
   ngOnInit(): void {
     // Fetch questions from the backend
@@ -26,7 +26,6 @@ export class QuizComponent implements OnInit {
       }
     );
   }
-
 
   // Method to handle answer selection
   selectAnswer(answer: string, question: string): void {
